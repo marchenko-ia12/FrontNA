@@ -151,8 +151,8 @@ class RegistrationForm extends React.Component {
                         <Input/>
                     )}
                 </FormItem>
-                <FormItem {...tailFormItemLayout}>
-                    <Button type="primary" htmlType="submit">Register</Button>
+                <FormItem {...tailFormItemLayout} >
+                    <Button type="primary" htmlType="submit"  >Register</Button>
                 </FormItem>
             </Form>
             </StyledFlex1>
@@ -169,16 +169,5 @@ const WrappedRegistrationForm = Form.create()(RegistrationForm);
 export default WrappedRegistrationForm
 
 const StyledFlex1 = styled(Flex)`
-    margin-top: 600; 
-    border: 1px solid #b366ff;
-    border-radius: 5px;
-    .ant-menu{
-          display: flex;
-          justify-content: space-between;
-          width: 70%;
-          padding: 0 20px;
-          box-sizing: border-box;
-          background: rgba(255, 255, 255, 0.7);
-          font-weight: bolder;
-      }
+    margin: auto; 
 `;

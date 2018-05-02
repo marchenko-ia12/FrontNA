@@ -43,18 +43,17 @@ class NormalLoginForm extends React.Component {
                         <Input prefix={<Icon type="lock" style={{ color: '#b366ff' }} />} type="password" placeholder="Password" />
                     )}
                 </FormItem>
-                <FormItem>
+                <FormItem >
                     {getFieldDecorator('remember', {
                         valuePropName: 'checked',
                         initialValue: true,
                     })(
                         <Checkbox>Remember me</Checkbox>
                     )}
-                    <a className="login-form-forgot" href="">Forgot password</a>
                     <Button type="primary" htmlType="submit" className="login-form-button">
                         Log in
                     </Button>
-                    Or <a href="" onClick={item => this.context.router.history.push(`/register`)}>Register now!</a>
+                    Or <a href="" onClick={item => this.context.router.history.push(`/register`)} style={{ color: '#b4a7d6' }}>Register now!</a>
                 </FormItem>
             </Form>
             </StyledFlex2>
@@ -82,14 +81,8 @@ const StyledFlex2 = styled(Flex)`
 .login-form-button {
     width: 100%;
 }
-    margin: auto; 
-    .ant-menu{
-          display: flex;
-          justify-content: space-between;
-          width: 70%;
-          padding: 0 20px;
-          box-sizing: border-box;
-          background: rgba(255, 255, 255, 0.7);
-          font-weight: bolder;
-      }
+    margin: auto;
+.login-form-button{
+background-color: #b4a7d6;
+}    
 `;

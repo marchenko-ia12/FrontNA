@@ -10,7 +10,7 @@ export default class App extends Component {
         return (
             <StyledFlex flexDirection='column' flex={1}>
                 <Header />
-                <Flex mt={400} flex={1}>
+                <Flex flex={1}>
                     <Routes />
                 </Flex>
             </StyledFlex>

@@ -40,5 +40,8 @@
       "prettier --write",
       "git add"
     ]
+  },
+  "theme": {
+    "primary-color": "#b4a7d6"
   }
 }

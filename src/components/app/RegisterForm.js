@@ -1,15 +1,10 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 import 'antd/dist/antd.css';
 //import '../LoginForm.css';
-import { Form, Input, Tooltip, Icon, Select, Button, AutoComplete } from 'antd';
+import { Form, Input, Tooltip, Icon, Button } from 'antd';
 import styled from 'styled-components';
 import { Flex } from 'grid-styled';
 const FormItem = Form.Item;
-const Option = Select.Option;
-
-const AutoCompleteOption = AutoComplete.Option;
-
 
 class RegistrationForm extends React.Component {
     state = {
@@ -45,7 +40,7 @@ class RegistrationForm extends React.Component {
     }
     render() {
         const { getFieldDecorator } = this.props.form;
-        const { autoCompleteResult } = this.state;
+        //const { autoCompleteResult } = this.state;
 
         const formItemLayout = {
             labelCol: {
@@ -122,7 +117,7 @@ class RegistrationForm extends React.Component {
                 </FormItem>
                 <FormItem
                     {...formItemLayout}
-                    label="Confirm Password"
+                    label="And again"
                 >
                     {getFieldDecorator('confirm', {
                         rules: [{

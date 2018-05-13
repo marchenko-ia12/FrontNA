@@ -1,5 +1,5 @@
 import Loadable from 'react-loadable';
-import {Link, Redirect, Route, Switch} from 'react-router-dom';
+import { Redirect, Route, Switch} from 'react-router-dom';
 import React, {Component} from 'react';
 
 const Main = Loadable({
@@ -23,6 +23,12 @@ const Register = Loadable({
     }
 });
 
+const UrNews =  Loadable({
+    loader: () => import('../app/NewsThread'),
+    loading() {
+        return <div>Loading...</div>
+    }
+});
 
 export default class Routes extends Component {
     render() {
@@ -34,6 +40,7 @@ export default class Routes extends Component {
                 />
                 <Route
                     path='/urnews'
+                    render={() => <UrNews />}
                 />
                 <Route
                     path='/profile'

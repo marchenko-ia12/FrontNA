@@ -1,4 +1,3 @@
-import ReactDOM from 'react-dom';
 import 'antd/dist/antd.css';
 import PropTypes from 'prop-types';
 //import '../loginform.css';
@@ -6,7 +5,7 @@ import './RegisterForm';
 import styled from 'styled-components';
 import { Flex } from 'grid-styled';
 import React, {Component} from 'react'
-import { Form, Icon, Input, Button, Checkbox, AutoComplete, Select } from 'antd';
+import { Form, Icon, Input, Button, Checkbox } from 'antd';
 const FormItem = Form.Item;
 
 
@@ -33,14 +32,14 @@ class NormalLoginForm extends React.Component {
                     {getFieldDecorator('userName', {
                         rules: [{ required: true, message: 'Please input your username!' }],
                     })(
-                        <Input prefix={<Icon type="user" style={{ color: '#b366ff' }} />} placeholder="Username" />
+                        <Input prefix={<Icon type="user" style={{ color: '#808080' }} />} placeholder="Username" />
                     )}
                 </FormItem>
                 <FormItem>
                     {getFieldDecorator('password', {
                         rules: [{ required: true, message: 'Please input your Password!' }],
                     })(
-                        <Input prefix={<Icon type="lock" style={{ color: '#b366ff' }} />} type="password" placeholder="Password" />
+                        <Input prefix={<Icon type="lock" style={{ color: '#808080' }} />} type="password" placeholder="Password" />
                     )}
                 </FormItem>
                 <FormItem >
@@ -53,7 +52,7 @@ class NormalLoginForm extends React.Component {
                     <Button type="primary" htmlType="submit" className="login-form-button">
                         Log in
                     </Button>
-                    Or <a href="" onClick={item => this.context.router.history.push(`/register`)} style={{ color: '#b4a7d6' }}>Register now!</a>
+                    Or <a href="" onClick={item => this.context.router.history.push(`/register`)} >Register now!</a>
                 </FormItem>
             </Form>
             </StyledFlex2>
@@ -82,7 +81,5 @@ const StyledFlex2 = styled(Flex)`
     width: 100%;
 }
     margin: auto;
-.login-form-button{
-background-color: #b4a7d6;
-}    
+    
 `;

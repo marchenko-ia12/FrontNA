@@ -44,7 +44,7 @@ const StyledFlex = styled(Flex)`
           width: 70%;
           padding: 0 20px;
           box-sizing: border-box;
-          background-color: #b4a7d6;
+         
           border-radius: 20px;
           font-weight: bolder;
       }      

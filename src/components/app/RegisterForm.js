@@ -66,7 +66,7 @@ class RegistrationForm extends React.Component {
         };
         return (
             <StyledFlex1>
-            <Form onSubmit={this.handleSubmit}>
+            <Form onSubmit={this.handleSubmit} method="post" action="/addname">
                 <FormItem
                     {...formItemLayout}
                     label="First Name"

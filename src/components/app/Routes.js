@@ -30,6 +30,19 @@ const UrNews =  Loadable({
     }
 });
 
+const Login =  Loadable({
+    loader: () => import('../app/Login'),
+    loading() {
+        return <div>Loading...</div>
+    }
+});
+const Fail =  Loadable({
+    loader: () => import('../app/Fail404'),
+    loading() {
+        return <div>Loading...</div>
+    }
+});
+
 export default class Routes extends Component {
     render() {
         return (
@@ -43,12 +56,16 @@ export default class Routes extends Component {
                     render={() => <UrNews />}
                 />
                 <Route
-                    path='/profile'
-                    render={() => <Profile />}
+                    path='/login'
+                    render={() => <Login />}
                 />
                 <Route
                     path='/register'
                     render={() => <Register />}
+                />
+                <Route
+                    path='/fail'
+                    render={() => <Fail/>}
                 />
                 <Redirect to='/main' />
             </Switch>

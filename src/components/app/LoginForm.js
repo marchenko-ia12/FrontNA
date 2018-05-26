@@ -7,27 +7,40 @@ import { Flex } from 'grid-styled';
 import React, {Component} from 'react'
 import { Form, Icon, Input, Button, Checkbox } from 'antd';
 const FormItem = Form.Item;
+const axios = require('axios');
 
 
 
 class NormalLoginForm extends React.Component {
-    handleSubmit = (e) => {
-        e.preventDefault();
-        this.props.form.validateFields((err, values) => {
-            if (!err) {
-                console.log('Received values of form: ', values);
-            }
-        });
+    state = {
+        username: '',
+        password: ''
     }
+    handleSubmit = event => {
+        event.preventDefault();
+
+        const user = {
+            username: this.state.username,
+            password: this.state.password,
+        };
+
+        axios.post('http://localhost:2000/main', {user})
+            .then(res => {
+                console.log(res);
+                console.log(res.data);
+            })
+    }
+
     static contextTypes = {
         ...Component.contextTypes,
         router: PropTypes.object,
     };
+
     render() {
         const { getFieldDecorator } = this.props.form;
         return (
             <StyledFlex2>
-            <Form onSubmit={this.handleSubmit} className="login-form">
+            <Form onSubmit={this.handleSubmit} className="login-form" method="post" action="/login">
                 <FormItem>
                     {getFieldDecorator('userName', {
                         rules: [{ required: true, message: 'Please input your username!' }],
@@ -49,10 +62,16 @@ class NormalLoginForm extends React.Component {
                     })(
                         <Checkbox>Remember me</Checkbox>
                     )}
-                    <Button type="primary" htmlType="submit" className="login-form-button">
+                    <Button type="primary" htmlType="submit" className="login-form-button" /*onClick={item => this.context.router.history.push(`/login`)}*/>
                         Log in
                     </Button>
-                    Or <a href="" onClick={item => this.context.router.history.push(`/register`)} >Register now!</a>
+                    <a href="" onClick={e => {
+                        e.preventDefault();
+                        this.context.router.history.push('/register');
+                    }}
+                    >
+                        Register now!
+                    </a>
                 </FormItem>
             </Form>
             </StyledFlex2>

@@ -1,8 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Flex } from 'grid-styled';
-const fakeDataUrl = 'https://randomuser.me/api/?results=5&inc=name,gender,email,nat&noinfo';
-var obj;
+
 export default class LoadMoreList extends React.Component {
     constructor(props) {
         super(props);

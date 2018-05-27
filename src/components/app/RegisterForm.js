@@ -1,7 +1,6 @@
 import React from 'react';
 import 'antd/dist/antd.css';
-//import '../LoginForm.css';
-import {Form, Input, Tooltip, Icon, Button} from 'antd';
+import {Form, Input, Button} from 'antd';
 import styled from 'styled-components';
 import {Flex} from 'grid-styled';
 
@@ -12,20 +11,24 @@ class RegistrationForm extends React.Component {
     state = {
         confirmDirty: false,
         autoCompleteResult: [],
-        username: '',
         email: '',
+        username: '',
         password: '',
-        confPassword: '',
+        passwordConf: '',
     };
+
+    handleChange (value, param){
+        this.setState({[param]: value});
+    }
 
     handleSubmit = event => {
         event.preventDefault();
 
         const user = {
             email: this.state.email,
-            username: this.state.nickname,
+            username: this.state.username,
             password: this.state.password,
-            confPassword: this.state.confirm,
+            passwordConf: this.state.passwordConf,
         };
 
         axios.post('http://localhost:2000/register', {user})
@@ -56,7 +59,6 @@ class RegistrationForm extends React.Component {
 
     render() {
         const {getFieldDecorator} = this.props.form;
-        //const { autoCompleteResult } = this.state;
 
         const formItemLayout = {
             labelCol: {
@@ -94,24 +96,22 @@ class RegistrationForm extends React.Component {
                                 required: true, message: 'Please input your E-mail!',
                             }],
                         })(
-                            <Input/>
+                            <Input
+                                setfieldsvalue={this.state.email}
+                                onChange={(e) => this.handleChange(e.target.value, 'email')}
+                            />
                         )}
                     </FormItem>
                     <FormItem
                         {...formItemLayout}
-                        label={(
-                            <span>
-              Nickname&nbsp;
-                                <Tooltip title="What do you want others to call you?">
-                <Icon type="question-circle-o"/>
-              </Tooltip>
-            </span>
-                        )}
+                        label="Username"
                     >
-                        {getFieldDecorator('nickname', {
-                            rules: [{required: true, message: 'Please input your nickname!', whitespace: true}],
+                        {getFieldDecorator('username', {
+                            rules: [{ required: true, message: 'Please input your username!', whitespace: true }],
                         })(
-                            <Input/>
+                            <Input
+                                setfieldsvalue={this.state.username}
+                                onChange={(e) => this.handleChange(e.target.value, 'username')}/>
                         )}
                     </FormItem>
                     <FormItem
@@ -125,21 +125,28 @@ class RegistrationForm extends React.Component {
                                 validator: this.validateToNextPassword,
                             }],
                         })(
-                            <Input type="password"/>
+                            <Input
+                                setfieldsvalue={this.state.password}
+                                type="password"
+                                onChange={(e) => this.handleChange(e.target.value, 'password')}/>
                         )}
                     </FormItem>
                     <FormItem
                         {...formItemLayout}
                         label="And again"
                     >
-                        {getFieldDecorator('confirm', {
+                        {getFieldDecorator('passwordConf', {
                             rules: [{
                                 required: true, message: 'Please confirm your password!',
                             }, {
                                 validator: this.compareToFirstPassword,
                             }],
                         })(
-                            <Input type="password" onBlur={this.handleConfirmBlur}/>
+                            <Input
+                                setfieldsvalue={this.state.passwordConf}
+                                type="password"
+                                onBlur={this.handleConfirmBlur}
+                                onChange={(e) => this.handleChange(e.target.value, 'passwordConf')}/>
                         )}
                     </FormItem>
                     <FormItem {...tailFormItemLayout} >

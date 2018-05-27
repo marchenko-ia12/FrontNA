@@ -16,7 +16,11 @@ class NormalLoginForm extends React.Component {
         username: '',
         password: ''
     }
-    handleSubmit = event => {
+
+    handleChange (value, param){
+        this.setState({[param]: value});
+    }
+    handleSubmit = async event => {
         event.preventDefault();
 
         const user = {
@@ -26,7 +30,7 @@ class NormalLoginForm extends React.Component {
 
         axios.post('http://localhost:2000/main', {user})
             .then(res => {
-                console.log(res);
+                res.send(user);
                 console.log(res.data);
             })
     }

@@ -1,45 +1,50 @@
 import 'antd/dist/antd.css';
 import PropTypes from 'prop-types';
-//import '../loginform.css';
 import './RegisterForm';
 import styled from 'styled-components';
 import { Flex } from 'grid-styled';
-import React, {Component} from 'react'
-import { Form, Icon, Input, Button, Checkbox } from 'antd';
+import React from 'react'
+import { Form, Icon, Input, Button } from 'antd';
 const FormItem = Form.Item;
 const axios = require('axios');
 
-
-
 class NormalLoginForm extends React.Component {
     state = {
+        confirmDirty: false,
+        autoCompleteResult: [],
+        email: '',
         username: '',
-        password: ''
+        password: '',
+        passwordConf: '',
+        token: [],
+    };
+    static contextTypes = {
+        router: PropTypes.object.isRequired,
     }
 
     handleChange (value, param){
         this.setState({[param]: value});
     }
-    handleSubmit = async event => {
+
+    handleSubmit = event => {
         event.preventDefault();
 
         const user = {
+            email: this.state.email,
             username: this.state.username,
             password: this.state.password,
+            passwordConf: this.state.passwordConf,
         };
 
-        axios.post('http://localhost:2000/main', {user})
+        axios.post('/api/main', {user})
             .then(res => {
-                res.send(user);
+                console.log(res);
                 console.log(res.data);
+                this.context.router.history.push('/login');
+                localStorage.setItem('token',res.data.token);
+                console.log(localStorage.getItem('token'));
             })
     }
-
-    static contextTypes = {
-        ...Component.contextTypes,
-        router: PropTypes.object,
-    };
-
     render() {
         const { getFieldDecorator } = this.props.form;
         return (
@@ -47,26 +52,34 @@ class NormalLoginForm extends React.Component {
             <Form onSubmit={this.handleSubmit} className="login-form" method="post" action="/login">
                 <FormItem>
                     {getFieldDecorator('userName', {
-                        rules: [{ required: true, message: 'Please input your username!' }],
+                        rules: [{ required: true, message: 'Please input your email!' }],
                     })(
-                        <Input prefix={<Icon type="user" style={{ color: '#808080' }} />} placeholder="Username" />
+                        <Input
+                            prefix={<Icon
+                                type="user"
+                                style={{ color: '#808080' }} />}
+                            setfieldsvalue={this.state.username}
+                            placeholder="E-mail"
+                            onChange={(e) => this.handleChange(e.target.value, 'username')}
+                        />
                     )}
                 </FormItem>
                 <FormItem>
                     {getFieldDecorator('password', {
                         rules: [{ required: true, message: 'Please input your Password!' }],
                     })(
-                        <Input prefix={<Icon type="lock" style={{ color: '#808080' }} />} type="password" placeholder="Password" />
+                        <Input
+                            prefix={<Icon
+                                type="lock"
+                                style={{ color: '#808080' }} />}
+                            setfieldsvalue={this.state.password}
+                            type="password" placeholder="Password"
+                            onChange={(e) => this.handleChange(e.target.value, 'password')}
+                        />
                     )}
                 </FormItem>
                 <FormItem >
-                    {getFieldDecorator('remember', {
-                        valuePropName: 'checked',
-                        initialValue: true,
-                    })(
-                        <Checkbox>Remember me</Checkbox>
-                    )}
-                    <Button type="primary" htmlType="submit" className="login-form-button" /*onClick={item => this.context.router.history.push(`/login`)}*/>
+                    <Button type="primary" htmlType="submit" className="login-form-button">
                         Log in
                     </Button>
                     <a href="" onClick={e => {
@@ -86,11 +99,6 @@ class NormalLoginForm extends React.Component {
 const WrappedNormalLoginForm = Form.create()(NormalLoginForm);
 
 export default WrappedNormalLoginForm
-
-
-//const WrappedNormalLoginForm = Form.create()(NormalLoginForm);
-
-//ReactDOM.render(<WrappedNormalLoginForm />, document.getElementById('container'));
 
 const StyledFlex2 = styled(Flex)`
     .login-form {

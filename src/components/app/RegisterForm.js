@@ -1,5 +1,6 @@
 import React from 'react';
 import 'antd/dist/antd.css';
+import PropTypes from 'prop-types';
 import {Form, Input, Button} from 'antd';
 import styled from 'styled-components';
 import {Flex} from 'grid-styled';
@@ -16,6 +17,9 @@ class RegistrationForm extends React.Component {
         password: '',
         passwordConf: '',
     };
+    static contextTypes = {
+        router: PropTypes.object.isRequired,
+    }
 
     handleChange (value, param){
         this.setState({[param]: value});
@@ -31,10 +35,11 @@ class RegistrationForm extends React.Component {
             passwordConf: this.state.passwordConf,
         };
 
-        axios.post('http://localhost:2000/register', {user})
+        axios.post('/api/register', {user})
             .then(res => {
                 console.log(res);
                 console.log(res.data);
+                this.context.router.history.push('/main');
             })
     }
     handleConfirmBlur = (e) => {

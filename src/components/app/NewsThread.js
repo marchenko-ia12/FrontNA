@@ -15,7 +15,6 @@ export default class LoadMoreList extends React.Component {
         fetch(url)
             .then(response => response.json())
             .then((responseData) => {
-                console.log(responseData);
                 this.setState({
                     data: responseData
                 });
@@ -24,7 +23,7 @@ export default class LoadMoreList extends React.Component {
     render() {
         const list = this.state.data.map(site => (
             <li>
-                <a key={'mykey'} href={site.url}> {site.title} </a>
+                <a key={site._id} href={site.url}> {site.title} </a>
             </li>
         ));
         return (

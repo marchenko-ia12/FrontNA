@@ -19,6 +19,7 @@
     "express": "^4.16.3",
     "grid-styled": "^4.1.0",
     "jsonwebtoken": "^8.2.1",
+    "jwt-decode": "^2.2.0",
     "koa": "^2.5.1",
     "koa-bodyparser": "^4.2.1",
     "koa-logger": "^3.2.0",
@@ -57,6 +58,7 @@
     "eject": "react-scripts eject",
     "precommit": "lint-staged"
   },
+  "proxy": "http://localhost:2000",
   "homepage": "https://cra-redux-router-thunk.herokuapp.com",
   "lint-staged": {
     "*.{js,json,css,md}": [

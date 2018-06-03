@@ -22,8 +22,8 @@ export default class LoadMoreList extends React.Component {
     }
     render() {
         const list = this.state.data.map(site => (
-            <li>
-                <a key={site._id} href={site.url}> {site.title} </a>
+            <li key={site._id}>
+                <a href={site.url}> {site.title} </a>
             </li>
         ));
         return (

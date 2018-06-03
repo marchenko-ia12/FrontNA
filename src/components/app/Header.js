@@ -20,13 +20,13 @@ export default class Header extends Component {
             <header className="header">
                 <StyledFlex>
                     <Menu mode="horizontal" onClick={item => this.context.router.history.push(`/${item.key}`)}>
-                        <MenuItem key="main">
+                        <MenuItem key="personal_news">
                             Ваша подборка
                         </MenuItem>
                         <MenuItem key="urnews">
                             Все новости
                         </MenuItem>
-                        <MenuItem key="profile">
+                        <MenuItem key="main">
                             Профиль
                         </MenuItem>
                     </Menu>

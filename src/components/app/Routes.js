@@ -9,13 +9,6 @@ const Main = Loadable({
     }
 });
 
-const Profile = Loadable({
-    loader: () => import('../app/LoginForm'),
-    loading() {
-        return <div>Loading...</div>
-    }
-});
-
 const Register = Loadable({
     loader: () => import('../app/RegisterForm'),
     loading() {
@@ -36,8 +29,8 @@ const Login =  Loadable({
         return <div>Loading...</div>
     }
 });
-const Fail =  Loadable({
-    loader: () => import('../app/Fail404'),
+const PersonalNews =  Loadable({
+    loader: () => import('../app/PersonalNewsThread'),
     loading() {
         return <div>Loading...</div>
     }
@@ -64,9 +57,10 @@ export default class Routes extends Component {
                     render={() => <Register />}
                 />
                 <Route
-                    path='/fail'
-                    render={() => <Fail/>}
+                    path='/personal_news'
+                    render={() => <PersonalNews />}
                 />
+
                 <Redirect to='/main' />
             </Switch>
         );

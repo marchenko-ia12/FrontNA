@@ -41,56 +41,60 @@ class NormalLoginForm extends React.Component {
                 console.log(res);
                 console.log(res.data);
                 this.context.router.history.push('/login');
-                localStorage.setItem('token',res.data.token);
-                console.log(localStorage.getItem('token'));
+                sessionStorage.setItem('token',res.data.token);
             })
     }
     render() {
         const { getFieldDecorator } = this.props.form;
         return (
+
             <StyledFlex2>
-            <Form onSubmit={this.handleSubmit} className="login-form" method="post" action="/login">
-                <FormItem>
-                    {getFieldDecorator('userName', {
-                        rules: [{ required: true, message: 'Please input your email!' }],
-                    })(
-                        <Input
-                            prefix={<Icon
-                                type="user"
-                                style={{ color: '#808080' }} />}
-                            setfieldsvalue={this.state.username}
-                            placeholder="E-mail"
-                            onChange={(e) => this.handleChange(e.target.value, 'username')}
-                        />
-                    )}
-                </FormItem>
-                <FormItem>
-                    {getFieldDecorator('password', {
-                        rules: [{ required: true, message: 'Please input your Password!' }],
-                    })(
-                        <Input
-                            prefix={<Icon
-                                type="lock"
-                                style={{ color: '#808080' }} />}
-                            setfieldsvalue={this.state.password}
-                            type="password" placeholder="Password"
-                            onChange={(e) => this.handleChange(e.target.value, 'password')}
-                        />
-                    )}
-                </FormItem>
-                <FormItem >
-                    <Button type="primary" htmlType="submit" className="login-form-button">
-                        Log in
-                    </Button>
-                    <a href="" onClick={e => {
-                        e.preventDefault();
-                        this.context.router.history.push('/register');
-                    }}
-                    >
-                        Register now!
-                    </a>
-                </FormItem>
-            </Form>
+                { sessionStorage.getItem('token') == null ?
+                    (<Form onSubmit={this.handleSubmit} className="login-form" method="post" action="/login">
+                    <FormItem>
+                        {getFieldDecorator('userName', {
+                            rules: [{required: true, message: 'Please input your email!'}],
+                        })(
+                            <Input
+                                prefix={<Icon
+                                    type="user"
+                                    style={{color: '#808080'}}/>}
+                                setfieldsvalue={this.state.username}
+                                placeholder="E-mail"
+                                onChange={(e) => this.handleChange(e.target.value, 'username')}
+                            />
+                        )}
+                    </FormItem>
+                    <FormItem>
+                        {getFieldDecorator('password', {
+                            rules: [{required: true, message: 'Please input your Password!'}],
+                        })(
+                            <Input
+                                prefix={<Icon
+                                    type="lock"
+                                    style={{color: '#808080'}}/>}
+                                setfieldsvalue={this.state.password}
+                                type="password" placeholder="Password"
+                                onChange={(e) => this.handleChange(e.target.value, 'password')}
+                            />
+                        )}
+                    </FormItem>
+                    <FormItem>
+                        <Button type="primary" htmlType="submit" className="login-form-button">
+                            Log in
+                        </Button>
+                        <a href="" onClick={e => {
+                            e.preventDefault();
+                            this.context.router.history.push('/register');
+                        }}
+                        >
+                            Register now!
+                        </a>
+                    </FormItem>
+                </Form> ) :
+                    ( <h1>Вы авторизованы!</h1>)
+
+                }
             </StyledFlex2>
         );
     }

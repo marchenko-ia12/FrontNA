@@ -1,9 +1,7 @@
 import 'antd/dist/antd.css';
 import styled from 'styled-components';
 import { Flex } from 'grid-styled';
-import React, {Component} from 'react'
-import { Form} from 'antd';
-const FormItem = Form.Item;
+import React from 'react'
 
 
 export default class Login extends React.Component {

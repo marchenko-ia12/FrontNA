@@ -13,18 +13,19 @@ export default class PersonalNewsThread extends React.Component {
     };
 
     componentDidMount() {
-        const user = sessionStorage.getItem('token');
-        axios.get('/api/personal_news', {
+        const url = '/api/personal_news';
+        axios.get(url, {
             params: {
-                token: user,
+                token: sessionStorage.getItem('token')
             }
         })
-            .then(response => response.json())
-            .then((responseData) => {
+            .then(response => {
                 this.setState({
-                    data: responseData
+                    data: response.data
                 });
-            })
+            });
+
+
     }
 
     async postTagInProfile(tag) {

@@ -22,9 +22,11 @@ export default class LoadMoreList extends React.Component {
     }
     render() {
         const list = this.state.data.map(site => (
+            <StyledFlex>
             <li key={site._id}>
                 <a href={site.url}> {site.title} </a>
             </li>
+            </StyledFlex>
         ));
         return (
             <StyledFlex2>
@@ -47,4 +49,17 @@ const StyledFlex2 = styled(Flex)`
     
 `;
 
+const StyledFlex = styled(Flex)`
+  font-family: "Helvetica Neue", Roboto, "Segoe UI", Calibri, sans-serif;
+  font-size: 14px;
+  font-weight: bold;
+  line-height: 16px;
+  border-color: #eee #ddd #bbb;
+  border-radius: 10px;
+  border-style: solid;
+  border-width: 1px;
+  margin: 10px 5px;
+  padding: 0 16px 16px 16px;
+  max-width: 800px;
+`;
 

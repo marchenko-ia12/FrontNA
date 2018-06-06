@@ -26,6 +26,11 @@ class NormalLoginForm extends React.Component {
         this.setState({[param]: value});
     }
 
+    clearStorage() {
+        sessionStorage.clear();
+        this.context.router.history.push('/urnews');
+    }
+
     handleSubmit = event => {
         event.preventDefault();
 
@@ -47,7 +52,6 @@ class NormalLoginForm extends React.Component {
     render() {
         const { getFieldDecorator } = this.props.form;
         return (
-
             <StyledFlex2>
                 { sessionStorage.getItem('token') == null ?
                     (<Form onSubmit={this.handleSubmit} className="login-form" method="post" action="/login">
@@ -92,7 +96,21 @@ class NormalLoginForm extends React.Component {
                         </a>
                     </FormItem>
                 </Form> ) :
-                    ( <h1>Вы авторизованы!</h1>)
+                    (
+                    <Flex>
+                        <h1>Вы авторизованы</h1>
+                        <Flex px={1}>
+                        <Button
+                            type="primary"
+                            htmlType="submit"
+
+                            onClick={this.clearStorage.bind(this)}
+                        >
+                            Выйти
+                        </Button>
+                        </Flex>
+                    </Flex>
+                    )
 
                 }
             </StyledFlex2>
